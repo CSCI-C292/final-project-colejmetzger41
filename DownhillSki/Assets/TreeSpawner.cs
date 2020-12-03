@@ -9,6 +9,10 @@ public class TreeSpawner : MonoBehaviour
     float _ySpawn;
 
     [SerializeField] GameObject _treePrefab;
+
+    [SerializeField] GameObject _smallTreePrefab;
+
+    [SerializeField] RuntimeData _runtimeData;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +20,9 @@ public class TreeSpawner : MonoBehaviour
         _xMax = Camera.main.ViewportToWorldPoint(new Vector3(1,0,0)).x;
         _ySpawn = Camera.main.ViewportToWorldPoint(new Vector3(0,-0.15f,0)).y;
 
-        InvokeRepeating("SpawnTree", 0, 1f);
+        InvokeRepeating("SpawnTrees", 0, 0.4f);
+
+        _runtimeData.StartTime = Time.time;
     }
 
     // Update is called once per frame
@@ -25,9 +31,11 @@ public class TreeSpawner : MonoBehaviour
         
     }
 
-    void SpawnTree() {
+    void SpawnTrees() {
         float randX = Random.Range(_xMin, _xMax);
+        float randXSmall = Random.Range(_xMin, _xMax);
 
         Instantiate(_treePrefab, new Vector3(randX, _ySpawn, 0), Quaternion.identity);
+        Instantiate(_smallTreePrefab, new Vector3(randXSmall, _ySpawn, 0), Quaternion.identity);
     }
 }

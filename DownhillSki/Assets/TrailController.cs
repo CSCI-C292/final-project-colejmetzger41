@@ -10,9 +10,11 @@ public class TrailController : MonoBehaviour {
 
     public float lifetime = 5f; //lifetime of a point on the trail
 
-    public float minimumVertexDistance = 0.1f; //minimum distance moved before a new point is solidified.
+    public float minimumVertexDistance = 0.01f; //minimum distance moved before a new point is solidified.
 
     public Vector3 velocity; //direction the points are moving
+
+    Vector3 _parentScale;
 
     LineRenderer line;
     //position data
@@ -25,10 +27,11 @@ public class TrailController : MonoBehaviour {
     void Awake () {
         line = GetComponent<LineRenderer>();
         line.useWorldSpace = true;
-        line.numCapVertices = 5;
-        _startingPoint = transform.position;
-        _startingPoint.y += 0.15f;
-        _startingPoint.x += 0.15f;
+        //line.numCapVertices = 5;
+        _startingPoint = transform.parent.position;
+        _parentScale = transform.parent.localScale;
+        _startingPoint.y += _parentScale.y/2;
+        _startingPoint.x += _parentScale.x/2;
         points = new List<Vector3>() { _startingPoint }; //indices 1 - end are solidified points, index 0 is always transform.position
         line.SetPositions(points.ToArray());
     }   
@@ -47,8 +50,8 @@ public class TrailController : MonoBehaviour {
     void Update () {
 
         _startingPoint = transform.position;
-        _startingPoint.y += 0.15f;
-        _startingPoint.x += 0.15f;
+        _startingPoint.y += _parentScale.y/2;
+        _startingPoint.x += _parentScale.x/2;
 
         //cull based on lifetime
         while(spawnTimes.Count > 0 && spawnTimes.Peek() + lifetime < Time.time) {
