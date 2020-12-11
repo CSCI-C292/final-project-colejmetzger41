@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TreeSpawner : MonoBehaviour
 {
@@ -37,5 +38,18 @@ public class TreeSpawner : MonoBehaviour
 
         Instantiate(_treePrefab, new Vector3(randX, _ySpawn, 0), Quaternion.identity);
         Instantiate(_smallTreePrefab, new Vector3(randXSmall, _ySpawn, 0), Quaternion.identity);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider) {
+        if (collider.gameObject.name == "Player") {
+            _runtimeData.EndTime = Time.time;
+            _runtimeData.Score = (int)(_runtimeData.EndTime - _runtimeData.StartTime);
+
+            if (_runtimeData.Score > _runtimeData.HighScore) {
+                _runtimeData.HighScore = _runtimeData.Score;
+            }
+
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

@@ -8,6 +8,11 @@ public class Tree : MonoBehaviour
     [SerializeField] float _speed;
 
     [SerializeField] RuntimeData _runtimeData;
+
+    void Awake() {
+        Transform shadow = transform.Find("TreeShadow");
+        shadow.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
     
     // Update is called once per frame
     void Update()
@@ -17,18 +22,7 @@ public class Tree : MonoBehaviour
             Destroy(gameObject);
         }
         transform.position += new Vector3(0, Time.deltaTime * _speed, 0);
+
     }
 
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (collider.gameObject.name == "Player") {
-            _runtimeData.EndTime = Time.time;
-            _runtimeData.Score = (int)(_runtimeData.EndTime - _runtimeData.StartTime);
-
-            if (_runtimeData.Score > _runtimeData.HighScore) {
-                _runtimeData.HighScore = _runtimeData.Score;
-            }
-
-            SceneManager.LoadScene("GameOver");
-        }
-    }
 }

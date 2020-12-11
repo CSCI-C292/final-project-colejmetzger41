@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe3af74f077a6fd41a9be3d0dfb82df3, type: 3}
   m_Name: StartRuntime
   m_EditorClassIdentifier: 
-  Score: 0
-  HighScore: 0
-  StartTime: 0
-  EndTime: 0
+  Score: 1464
+  HighScore: 1464
+  StartTime: 6.12123
+  EndTime: 22.604605
+  Bonus: 1300

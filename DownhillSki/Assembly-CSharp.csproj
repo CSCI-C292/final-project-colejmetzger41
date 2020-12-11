@@ -40,6 +40,7 @@
      <Compile Include="Assets\RuntimeData.cs" />
      <Compile Include="Assets\SceneSwitcher.cs" />
      <Compile Include="Assets\ScoreDisplay.cs" />
+     <Compile Include="Assets\ScoreDisplayRunning.cs" />
      <Compile Include="Assets\TrailController.cs" />
      <Compile Include="Assets\Tree.cs" />
      <Compile Include="Assets\TreeSpawner.cs" />

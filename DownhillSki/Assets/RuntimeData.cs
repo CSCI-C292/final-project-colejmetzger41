@@ -14,4 +14,6 @@ public class RuntimeData : ScriptableObject
 
    public float EndTime; 
 
+   public int Bonus;
+
 }
